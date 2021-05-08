@@ -2,8 +2,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-email = "mlc2048@gmail.com"
-pas = "Ph0neDqiguai-"
+email = "@#%#!@gmail.com"
+pas = "#########"
 
 sms_gateway = '6504419401@txt.att.net'
 # The server we use to send emails in our case it will be gmail but every email provider has a different smtp 

@@ -1,2 +1,10 @@
-# lowfrequencytrading
-Low Frequency Trading to combine with dividend, covered call and exit strategy
+# stock-cover-call-app
+
+# Watch the tutorial video
+
+
+###  Launch the app
+
+```
+streamlit run app.py
+```
