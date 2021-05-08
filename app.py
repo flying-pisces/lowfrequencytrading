@@ -10,6 +10,9 @@ Description: Buy Stocks and Sell Covered Call
 ''')
 st.write('---')
 
+st.header('Hello 🌎!')
+if st.button('Balloons?'):
+    st.balloons()
 # Sidebar
 st.sidebar.subheader('Query parameters')
 start_date = st.sidebar.date_input("Start date", datetime.date(2019, 1, 1))
