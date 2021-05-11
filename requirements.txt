@@ -1,2 +1,1 @@
-streamlit
-smtplib
+streamlit==0.81.1
