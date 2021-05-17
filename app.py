@@ -33,12 +33,7 @@ def load_data(date_range):
             'Sec-Fetch-Mode': 'cors',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}
     df_sum = pd.DataFrame()
-    ### date_str: string in yyyy - mm - dd
-    ### example: url = 'https://api.nasdaq.com/api/calendar/dividends?date=2020-05-17'
-###    year = 2021
-###    month = 5
-###    day = 17
-###    date_obj = datetime.date(year, month, day)
+
     for date_obj in date_range:
         date_str = date_obj.strftime(format='%Y-%m-%d')
         params = {'date': date_str}
@@ -48,12 +43,14 @@ def load_data(date_range):
         results_list = results['data']['calendar']['rows']
 
         df = pd.DataFrame(results_list, columns=['symbol', 'dividend_Rate', 'dividend_Ex_Date', 'payment_Date'])
-        df_sum = df_sum.append(df)
+        df_sum = df_sum.append(df, ignore_index=True)
     return df_sum
 
 df = load_data(date_range)
 sector = df.groupby('symbol')
 st.header('Dividend Calendar in Coming Week')
 #st.write('Data Dimension: ' + str(df_selected_sector.shape[0]) + ' rows and ' + str(df_selected_sector.shape[1]) + ' columns.')
-st.dataframe(df)
+df_width = 800
+df_height = 3000
+st.dataframe(df, width=df_width, height=df_height)
 
