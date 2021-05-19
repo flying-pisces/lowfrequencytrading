@@ -1,6 +1,7 @@
 import requests
 import datetime
 import pandas as pd
+from yahoo_fin import stock_info as si
 
 calendars = []
 url = 'https://api.nasdaq.com/api/calendar/dividends'
@@ -23,5 +24,30 @@ params = {'date': date_str}
 page = requests.get(url, headers=hdrs, params=params)
 results = page.json()
 results_list = results['data']['calendar']['rows']
-
+new_list = []
 df = pd.DataFrame(results_list, columns=['symbol','dividend_Rate', 'dividend_Ex_Date', 'payment_Date'])
+
+
+now = datetime.datetime.now()
+openam = now.replace(hour=6, minute=30, second=0, microsecond=0)
+closepm= now.replace(hour=13, minute=0, second=0, microsecond=0)
+
+for result in results_list:
+        sym = result.get("symbol")
+        print(sym)
+        price = si.get_live_price(sym)
+        print(price)
+        now=datetime.datetime.now()
+        if now > closepm:
+                current_time = closepm.strftime("%Y-%m-%d %H:%M:%S")
+        elif now < openam:
+                current_time = openam.strftime("%Y-%m-%d %H:%M:%S")
+        else:
+                current_time = now.strftime("%Y-%m-%d %H:%M:%S")
+        print(current_time)
+        result['price'] = price
+        result['time'] = current_time
+        new_list.append(result)
+
+df_new = pd.DataFrame(results_list, columns=['symbol', 'price', 'time', 'dividend_Rate', 'dividend_Ex_Date', 'payment_Date'])
+breakpoint()

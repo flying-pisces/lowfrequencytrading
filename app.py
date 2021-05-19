@@ -37,11 +37,9 @@ def load_data(date_range):
     for date_obj in date_range:
         date_str = date_obj.strftime(format='%Y-%m-%d')
         params = {'date': date_str}
-
         page = requests.get(url, headers=hdrs, params=params)
         results = page.json()
         results_list = results['data']['calendar']['rows']
-
         df = pd.DataFrame(results_list, columns=['symbol', 'dividend_Rate', 'dividend_Ex_Date', 'payment_Date'])
         df_sum = df_sum.append(df, ignore_index=True)
     return df_sum
@@ -54,3 +52,8 @@ df_width = 800
 df_height = 3000
 st.dataframe(df, width=df_width, height=df_height)
 
+# Sandbox session
+# url = 'https://api.nasdaq.com/api/calendar/dividends?date=2020-05-15'
+# page = requests.get(url)
+# results = page.json()
+# results_list = results['data']['calendar']['rows']
