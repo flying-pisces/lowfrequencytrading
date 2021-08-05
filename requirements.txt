@@ -1,1 +1,2 @@
 streamlit==0.81.1
+yahoo-fin==0.8.9.1

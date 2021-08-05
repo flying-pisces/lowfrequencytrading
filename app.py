@@ -72,6 +72,6 @@ df = load_data(date_range)
 sector = df.groupby('symbol')
 st.header('Dividend Calendar in Coming Week')
 #st.write('Data Dimension: ' + str(df_selected_sector.shape[0]) + ' rows and ' + str(df_selected_sector.shape[1]) + ' columns.')
-df_width = 1200
+df_width = 1800
 df_height = 3000
 st.dataframe(df, width=df_width, height=df_height)
